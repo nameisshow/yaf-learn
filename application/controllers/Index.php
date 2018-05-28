@@ -16,7 +16,7 @@ class IndexController extends Controller_Abstract
         //$t = new Test();
         //$content = $t->to_test();
         //默认Action
-        toLog('index');
+        //toLog('index');
         $this->getView()->assign("content", "hello world");
     }
 

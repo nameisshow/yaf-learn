@@ -2,5 +2,5 @@
 learn for yaf
 
 
-yaf.use_namespace=1
+yaf.use_namespace=1  
 yaf.environ=develop
