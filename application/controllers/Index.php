@@ -8,6 +8,7 @@
 
 
 use Yaf\Controller_Abstract;
+use Yaf\Dispatcher;
 
 class IndexController extends Controller_Abstract
 {
@@ -17,16 +18,29 @@ class IndexController extends Controller_Abstract
         //$content = $t->to_test();
         //默认Action
         //toLog('index');
+        dump($this->getRequest()->getParams());
         $this->getView()->assign("content", "hello world");
     }
 
     public function echoAction()
     {
-        $log = new Monolog\Logger('name');
-        $log->pushHandler(new Monolog\Handler\StreamHandler('app.log', Monolog\Logger::WARNING));
+        echo 'echo';
+        $route = Dispatcher::getInstance()->getRouter();
+        dump($route->getRoutes());
 
-        $log->addWarning('Foo');
+        return false;
+    }
 
+    public function showGoodsNameAction($goodsname)
+    {
+        echo $goodsname;
+        dump($this->getRequest()->getParams());
+        return false;
+    }
+
+    public function productAction($productName)
+    {
+        echo $productName;
         return false;
     }
 }
