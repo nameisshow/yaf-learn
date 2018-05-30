@@ -47,9 +47,6 @@ class Bootstrap extends Bootstrap_Abstract
     //
     //    SeasLog::warning('your {website} was down,please {action} it ASAP!',array('{website}' => 'github.com','{action}' => 'rboot'));
     //
-    //    SeasLog::error('a error log');
-    //
-    //    SeasLog::critical('some thing was critical');
     //
     //    SeasLog::alert('yes this is a {messageName}',array('{messageName}' => 'alertMSG'));
     //
