@@ -18,7 +18,7 @@ class IndexController extends Controller_Abstract
         //$content = $t->to_test();
         //默认Action
         //toLog('index');
-        dump($this->getRequest()->getParams());
+        dump(Dispatcher::getInstance()->getRouter()->getRoutes());
         $this->getView()->assign("content", "hello world");
     }
 
@@ -31,16 +31,17 @@ class IndexController extends Controller_Abstract
         return false;
     }
 
-    public function showGoodsNameAction($goodsname)
+    public function showGoodsNameAction($showGoodsName)
     {
-        echo $goodsname;
+        echo $showGoodsName;
         dump($this->getRequest()->getParams());
         return false;
     }
 
-    public function productAction($productName)
+    public function productAction($showGoodsName)
     {
-        echo $productName;
+        //echo $productName;
+        dump($showGoodsName);
         return false;
     }
 }

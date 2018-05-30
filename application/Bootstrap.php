@@ -23,22 +23,31 @@ use Yaf\Route\Supervar;
  */
 class Bootstrap extends Bootstrap_Abstract
 {
+
+    // 加载公共函数
+    public function _initFunctions(Dispatcher $dispatcher)
+    {
+        Loader::import(Application::app()->getConfig()->application->directory . '/functions/functions.php');
+        //dump(Registry::get('config'));
+    }
+
+
     public function _initConfig(Dispatcher $dispatcher)
     {
         $config = Application::app()->getConfig();
 
         //$routeRewrite = new Ini(APP_PATH . '/conf/route.ini', ini_get('yaf.environ'));
         $routeRewrite = new Ini(APP_PATH . '/conf/route.ini');
-        echo '<pre>';
 
 
         Registry::set("config", $config);
-        Registry::set("other", $routeRewrite);
-        $dispatcher->getRouter()->addConfig($routeRewrite->other->product);
+        //dump(Registry::get("config")->routes);die;
+        //Registry::set("other", $routeRewrite);
+        $dispatcher->getRouter()->addConfig(Registry::get("config")->routes);
+        //$dispatcher->getRouter()->addConfig(Registry::get("otherRoutes"));
+        $dispatcher->getRouter()->addConfig($routeRewrite);
+        //dump($dispatcher->getRouter()->getRoutes());
 
-        var_dump($routeRewrite->other->product);
-
-        echo '</pre>';
     }
 
     //public function _initLog()
@@ -58,13 +67,6 @@ class Bootstrap extends Bootstrap_Abstract
     public function _initDefaultName(Dispatcher $dispatcher)
     {
         $dispatcher->setDefaultModule("Index")->setDefaultController("Index")->setDefaultAction("index");
-    }
-
-    // 加载公共函数
-    public function _initFunctions(Dispatcher $dispatcher)
-    {
-        Loader::import(Application::app()->getConfig()->application->directory . '/functions/functions.php');
-        //dump(Registry::get('config'));
     }
 
     // 操作路由
