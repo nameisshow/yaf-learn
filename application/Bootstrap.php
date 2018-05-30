@@ -23,19 +23,40 @@ use Yaf\Route\Supervar;
  */
 class Bootstrap extends Bootstrap_Abstract
 {
-    public function _initConfig()
+    public function _initConfig(Dispatcher $dispatcher)
     {
         $config = Application::app()->getConfig();
-        $routeRewrite = new Ini(APP_PATH . '/conf/route.ini', ini_get('yaf.environ'));
+
+        //$routeRewrite = new Ini(APP_PATH . '/conf/route.ini', ini_get('yaf.environ'));
+        $routeRewrite = new Ini(APP_PATH . '/conf/route.ini');
         echo '<pre>';
-        //var_dump($config = new \Yaf\Config\Ini(APP_PATH . '/conf/route.ini', ini_get('yaf.environ')));
+
 
         Registry::set("config", $config);
-        Registry::set("route", $routeRewrite);
-        var_dump(Registry::get('route'));
+        Registry::set("other", $routeRewrite);
+        $dispatcher->getRouter()->addConfig($routeRewrite->other->product);
+
+        var_dump($routeRewrite->other->product);
 
         echo '</pre>';
     }
+
+    //public function _initLog()
+    //{
+    //    SeasLog::getBasePath();
+    //
+    //    SeasLog::warning('your {website} was down,please {action} it ASAP!',array('{website}' => 'github.com','{action}' => 'rboot'));
+    //
+    //    SeasLog::error('a error log');
+    //
+    //    SeasLog::critical('some thing was critical');
+    //
+    //    SeasLog::alert('yes this is a {messageName}',array('{messageName}' => 'alertMSG'));
+    //
+    //    SeasLog::emergency('Just now, the house next door was completely burnt out! {note}',array('{note}' => 'it`s a joke'));
+    //    $countResult_1 = SeasLog::analyzerCount();
+    //    var_dump($countResult_1);
+    //}
 
     public function _initDefaultName(Dispatcher $dispatcher)
     {
@@ -43,7 +64,7 @@ class Bootstrap extends Bootstrap_Abstract
     }
 
     // 加载公共函数
-    public function _initFunctions()
+    public function _initFunctions(Dispatcher $dispatcher)
     {
         Loader::import(Application::app()->getConfig()->application->directory . '/functions/functions.php');
         //dump(Registry::get('config'));
@@ -85,7 +106,7 @@ class Bootstrap extends Bootstrap_Abstract
     //}
 
     //加载composer
-    public function _initComposer()
+    public function _initComposer(Dispatcher $dispatcher)
     {
         require_once APP_PATH . '/vendor/autoload.php';
     }
