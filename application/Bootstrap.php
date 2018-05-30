@@ -53,7 +53,7 @@ class Bootstrap extends Bootstrap_Abstract
     public function _initLog()
     {
         SeasLog::getBasePath();
-        SearLog::setLogger('yaf');
+        SeasLog::setLogger('yaf');
         SeasLog::warning('your {website} was down,please {action} it ASAP!',array('{website}' => 'github.com','{action}' => 'rboot'));
 
 
