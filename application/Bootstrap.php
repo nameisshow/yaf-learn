@@ -34,35 +34,33 @@ class Bootstrap extends Bootstrap_Abstract
 
     public function _initConfig(Dispatcher $dispatcher)
     {
+        //获取默认ini中的所有配置
         $config = Application::app()->getConfig();
 
+        //加载其他路由配置文件
         //$routeRewrite = new Ini(APP_PATH . '/conf/route.ini', ini_get('yaf.environ'));
         $routeRewrite = new Ini(APP_PATH . '/conf/route.ini');
 
-
+        //设置配置
         Registry::set("config", $config);
-        //dump(Registry::get("config")->routes);die;
-        //Registry::set("other", $routeRewrite);
-        $dispatcher->getRouter()->addConfig(Registry::get("config")->routes);
-        //$dispatcher->getRouter()->addConfig(Registry::get("otherRoutes"));
-        $dispatcher->getRouter()->addConfig($routeRewrite);
-        //dump($dispatcher->getRouter()->getRoutes());
 
+        //将config中属于routes对象的提取出来添加到路由中
+        $dispatcher->getRouter()->addConfig(Registry::get("config")->routes);
+        //同时将外部加载的路由也添加到路由中
+        $dispatcher->getRouter()->addConfig($routeRewrite);
     }
 
-    //public function _initLog()
-    //{
-    //    SeasLog::getBasePath();
-    //
-    //    SeasLog::warning('your {website} was down,please {action} it ASAP!',array('{website}' => 'github.com','{action}' => 'rboot'));
-    //
-    //
-    //    SeasLog::alert('yes this is a {messageName}',array('{messageName}' => 'alertMSG'));
-    //
-    //    SeasLog::emergency('Just now, the house next door was completely burnt out! {note}',array('{note}' => 'it`s a joke'));
-    //    $countResult_1 = SeasLog::analyzerCount();
-    //    var_dump($countResult_1);
-    //}
+    public function _initLog()
+    {
+        SeasLog::getBasePath();
+        SearLog::setLogger('yaf');
+        SeasLog::warning('your {website} was down,please {action} it ASAP!',array('{website}' => 'github.com','{action}' => 'rboot'));
+
+
+        SeasLog::alert('yes this is a {messageName}',array('{messageName}' => 'alertMSG'));
+
+        SeasLog::emergency('Just now, the house next door was completely burnt out! {note}',array('{note}' => 'it`s a joke'));
+    }
 
     public function _initDefaultName(Dispatcher $dispatcher)
     {

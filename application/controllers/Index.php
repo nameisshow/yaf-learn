@@ -38,10 +38,10 @@ class IndexController extends Controller_Abstract
         return false;
     }
 
-    public function productAction($showGoodsName)
+    public function productAction($name)
     {
         //echo $productName;
-        dump($showGoodsName);
+        dump($name);
         return false;
     }
 }
