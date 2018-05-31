@@ -12,8 +12,9 @@ class IndexController extends CommonController {
 
     public function indexAction()
     {
-        dump('this is home index');
+        dump('this is Home index');
         $this->commonAction();
+        dump($this->getRequest()->getParams());
         $this->getView()->assign('content','来自home的变量');
         //$this->getView()->render('index.html');
         $this->getView()->display('index.html');
