@@ -110,4 +110,13 @@ class Bootstrap extends Bootstrap_Abstract
         //关闭视图的自动渲染
         $dispatcher->disableView();
     }
+
+
+    //db部分
+    public function _initDb(Dispatcher $dispatcher)
+    {
+        //$routeRewrite = new Ini(APP_PATH . '/conf/db.ini');
+        //dump($routeRewrite->db);
+        //$dbConfig = Registry::get('');
+    }
 }

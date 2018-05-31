@@ -20,4 +20,12 @@ class IndexController extends CommonController {
         $this->getView()->display('index.html');
     }
 
+    public function mysqlAction()
+    {
+        //$db = new DbModel();
+        echo 'asd';
+        $db = new DbModel();
+        dump($db);
+    }
+
 }
