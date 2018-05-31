@@ -55,11 +55,6 @@ class Bootstrap extends Bootstrap_Abstract
         SeasLog::getBasePath();
         SeasLog::setLogger('yaf');
         SeasLog::warning('your {website} was down,please {action} it ASAP!',array('{website}' => 'github.com','{action}' => 'rboot'));
-
-
-        SeasLog::alert('yes this is a {messageName}',array('{messageName}' => 'alertMSG'));
-
-        SeasLog::emergency('Just now, the house next door was completely burnt out! {note}',array('{note}' => 'it`s a joke'));
     }
 
     public function _initDefaultName(Dispatcher $dispatcher)
@@ -80,7 +75,7 @@ class Bootstrap extends Bootstrap_Abstract
     //    $rewrite = new Rewrite(
     //        'goods/:goodsname/*',
     //        [
-    //            'controller'=>'Index',
+    //            'controllers'=>'Index',
     //            'action'=>'showGoodsName',
     //        ]
     //    );
@@ -89,7 +84,7 @@ class Bootstrap extends Bootstrap_Abstract
     //    $reg = new Regex(
     //        'product/([a-zA-Z-_0-9]+)',
     //        [
-    //            'controller'=>'Index',
+    //            'controllers'=>'Index',
     //            'action'=>'product',
     //        ],
     //        [
@@ -106,5 +101,13 @@ class Bootstrap extends Bootstrap_Abstract
     public function _initComposer(Dispatcher $dispatcher)
     {
         require_once APP_PATH . '/vendor/autoload.php';
+    }
+
+
+    //视图部分
+    public function _initView(Dispatcher $dispatcher)
+    {
+        //关闭视图的自动渲染
+        $dispatcher->disableView();
     }
 }
