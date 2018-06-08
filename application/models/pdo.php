@@ -23,6 +23,18 @@
 		private $group = '';
 		private $limit = 0;
 
+		private $operator = [
+			'eq'=>'=',
+			'neq'=>'!=',
+			'gt'=>'>',
+			'egt'=>'>='
+			'lt'=>'<',
+			'elt'=>'<=',
+			'like'=>'like',
+			'in'=>'in',
+			'notin'=>'not in',
+		];
+
 		
 
 		public function __construct($host = '127.0.0.1', $dbname = '', $user = 'root', $passwd = '', $prefix = ''){
@@ -83,7 +95,7 @@
 			return $this;
 		}
 
-		public function where(string $where){
+		public function where(array $where){
 			if($this->where){
 				if($this->or){
 					$this->where = '('.$this->where . ') or ('.$where.')';
@@ -92,6 +104,21 @@
 					$this->where = $this->where . ' and '.$where;
 				}
 			}
+		}
+
+		protected function createWhere(array &$where){
+			//['id'=>12]
+			//['id'=>['eq',12]]
+			//['name'=>['like','%zhang%']]
+			//['name'=>['like','%zhang%'],'age'=>['eq',23]]
+			//['id'=>['in',[1,2,3,4]]]
+			foreach($where as $key=>$val){
+				
+			}
+		}
+
+		protected function whereOpear(){
+
 		}
 
 		public function or(bool $flag){
